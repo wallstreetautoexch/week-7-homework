@@ -16,6 +16,69 @@
   </head>
 
   <body>
+    <style>
+    body {
+    background:
+     url("assets/images/trainwreck.jpg")    /* image */
+     top center / 100% 100% /* position / size */
+     no-repeat                /* repeat */
+     fixed                    /* attachment */
+     padding-box              /* origin */
+     content-box;              /* clip */
+     /*red;                     /* color */*/
+      }
+
+    .jumbotron {
+                 
+                color: white;
+                background-color:rgba(255,0,0,0.5); 
+    }
+
+    .panel-default  {
+                
+                color: white;
+                background-color:rgba(255,0,0,0.5); 
+    }
+
+    .panel-heading  {
+                
+                color: white;
+                background-color:rgba(255,0,0,0.5); 
+    }
+
+     .well  {
+                
+              
+                background-color:rgba(255,0,0,0.5); 
+    }
+
+    #full-train-list {
+                
+                color: white;
+                background-color:rgba(255,0,0,0.5);
+              
+    }
+
+    #train-input-submit  {
+                
+                color: blue;
+              
+    }
+
+     #reloadIt  {
+                
+                float: right;
+                color: blue;
+              
+    }  
+
+    h2 {
+                
+                color: white;
+              
+    }
+
+    </style>
 
     <div class="container">
 
@@ -26,6 +89,7 @@
         <h1 class="text-center">TRAIN SCHEDULE RARITAN VALLEY LINE</h1>
         <h3 class="panel-title">CURRENT TIME</h3>
         <section class="currentTime"></section>
+         <button id="reloadIt">RELOAD</button>
       </div>
 
       <div class="row">
@@ -65,6 +129,8 @@
              </div>; -->
             <input class="buttn" id="train-input-submit" type="submit">
           </form>
+
+    
               <!-- Sign-up Form (note the various input "types")-->
               <!-- <form role="form">
                 <div class="form-group">
@@ -514,6 +580,11 @@
 
     });
 
+    $('#reloadIt').on('click', function() {
+
+    console.log("RELOAD")
+    location.reload();
+});
 
   </script>
 
