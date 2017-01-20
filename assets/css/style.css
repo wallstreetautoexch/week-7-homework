@@ -1,0 +1,26 @@
+
+
+h1,h2,h3 p {
+	         margin-bottom: 20px;
+}
+
+
+h1,h2,h3 {
+	       font-family: 'Georgia' Times, TimesNewRoman, Serif;
+}
+
+#domOutput {
+
+	width: 100%;
+
+	  
+}
+          
+#gifs-appear-here {
+
+	width: 30%;
+	float: left;
+
+	  
+
+}
