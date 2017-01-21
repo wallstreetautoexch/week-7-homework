@@ -89,7 +89,7 @@
         <h1 class="text-center">TRAIN SCHEDULE RARITAN VALLEY LINE</h1>
         <h3 class="panel-title">CURRENT TIME</h3>
         <section class="currentTime"></section>
-         <button id="reloadIt">RELOAD</button>
+         <button id="reloadIt">Reload Train Schedule</button>
       </div>
 
       <div class="row">
@@ -221,165 +221,73 @@
     var trainStart = $("#start-input").val().trim(); 
     var trainInterval = $("#interval-input-input").val().trim();
     // var currentTime = $("#currenttime-input-input").val().trim();
+    
+    // Edit the Input
 
-    $("#train-input").val("");
-    $("#start-input").val("");
-    $("#interval-input-input").val("");
-    $("#currenttime-input-input").val("");
+    var editTheInputSwitch = "";
+    editTheInput (); 
 
-   //  var minutestonext = 0;
-   //  var minutesFromStartOfDay = 0;
-   //  var currentMin = 0;
-   //  var firstTrainSw = "N";
-   //  var firstTrainMinutes = 0;
-   //  var nextTrainTime = 0
+    if (editTheInputSwitch == "")
+    {
 
 
- 
-   //  console.log(trainName)
-   //  console.log(trainStart)
-
-   //  //  Initailize Date Time Variables
+        $("#train-input").val("");
+        $("#start-input").val("");
+        $("#interval-input-input").val("");
+        $("#currenttime-input-input").val("");
 
    
-   //  console.log(currentdateFormated);
-   //  var currentTimeFormated = (moment().format('HH:mm:ss'));
-   //  console.log(currentTimeFormated);
-   //  var currentHour = (moment().format('HH'));
-    
-   //  console.log("Current Hur  " + currentHour);
-   //  var currentMin = (moment().format('mm'));
-  
-   //  console.log("current Min  " + currentMin);
-   //  var nTrainStartTimeFormat = [0];
-   //  var hhIn = [0];
-   //  var mmIn = [0];
-   //  var hhCalc = 0;
-   //  var mmCalc = 0;
 
-   //  // Format the Train Start Time
+        // Code for the push
 
-   //  console.log("train start   " + trainStart)
+         dataRef.ref().push({
 
-   //  if (trainStart == "")
-   //  {
-   //   firstTrainSw = "N" 
-   //  }
-   //  else
-   //  {
+         trainName: trainName,
+         trainStart: trainStart,
+         trainInterval: trainInterval,
+         dateAdded: firebase.database.ServerValue.TIMESTAMP
+         });
 
-   //  nTrainStartTimeFormat = trainStart;
-   //   hhIn[0] = parseInt(nTrainStartTimeFormat[0], 10) ;
-   //   hhIn[1] = parseInt(nTrainStartTimeFormat[1], 10) ;
-   //   mmIn[0] = parseInt(nTrainStartTimeFormat[3], 10) ;
-   //   mmIn[1] = parseInt(nTrainStartTimeFormat[4], 10) ;
+       };
 
-     
-     
+      // Edit the Input
 
-   //   hhCalc = hhIn [0] * 10;
-   //   hhCalc = hhCalc + hhIn [1];
-   //   mmCalc = mmIn [0] * 10;
-   //   mmCalc = mmCalc + mmIn [1];
-     
+   function editTheInput () {
 
-     
-   //   console.log(hhCalc);
-   //   console.log(mmCalc);
-   // }
+      $("#trainName-display").empty();
+      $("#trainStart-display").empty();
+      $("#trainInterval-display").empty();
+      
 
-   // // calculate the First Train of the Day in MMM
+    if (trainName == "") 
+       {
+        editTheInputSwitch  = "1"
+        $("#trainName-display").append("Error Train Name Missing  " + trainName );
+       };
+    if ((trainStart > "00:00" ) && (trainStart < "23:59"))
+       {
+        console.log(trainStart)
+       }
+    else
+       {
+        editTheInputSwitch  = "1"
+        $("#trainStart-display").append("Train Start Number Invalid Must be between 00:00 and 12:59  " + trainStart );
+       };
 
-   //  if (hhCalc == 0 && mmCalc == 0)
-   //    {
-   //      firstTrainSw = "N"
-   //      firstTrainMinutes = 0
-   //    }
-   //  else
-   //    {
-   //     firstTrainMinutes = (hhCalc * 60);
-        
-   //     firstTrainMinutes = firstTrainMinutes + mmCalc;
-   //     firstTrainSw = "Y" 
-   //    }  
-
-   //     console.log("minutes of the first train  " + firstTrainMinutes)
-   //     console.log(" first Train switch  " + firstTrainSw);
-
-   //     // Calculate Current Time in MMM 
-
-   //     var minutesFromStartOfDay = (currentHour * 60);
-   //     currentMin = (currentMin * 1); 
-   //     minutesFromStartOfDay = minutesFromStartOfDay + currentMin;
-   //     console.log("minutes from start of Schedule  " + minutesFromStartOfDay)
+    if ((trainInterval > 0 ) && (trainInterval < 720))
+       {
+        console.log(trainInterval)
+       }
+    else
+       {
+        editTheInputSwitch  = "1"
+        $("#trainInterval-display").append("Train Interval Number Invalid Must be between 1 and 720  " + trainInterval );
+       };
 
 
-   //  //  Check to see there is a First Train to compare the current time to
-
-   //  if (firstTrainSw == "Y")
-   //    {
-   //      if (minutesFromStartOfDay < firstTrainMinutes)
-   //      {
-   //        minutestonext = firstTrainMinutes - minutesFromStartOfDay
-   //        nextTrainTime = firstTrainMinutes
-   //        firstTrainSw = "N"
-   //      }
-   //      else
-   //      {
-   //         test1 = (minutesFromStartOfDay % trainInterval)
-
-   //         console.log("1   " + test1)
-    
-   //         // Calculate Remaining Minutes in Interval to Next Train
-
-   //          minutestonext = trainInterval - test1
-
-   //          console.log("2   " + minutestonext)
-
-   //        //  Calculate THe Time of The Next Train In Minutes from Beginning of the Schedule 
-
-   //        nextTrainTime = minutesFromStartOfDay + minutestonext;
-   //        var nextTrainTime1 = nextTrainTime
-   //        console.log("next train time in minutes  " + nextTrainTime)
-   //      }
-   //    }
-   //    else
-   //    {
-   //       test1 = (minutesFromStartOfDay % trainInterval)
-
-   //       console.log("1   " + test1)
-    
-   //       // Calculate Remaining Minutes in Interval to Next Train
-
-   //       minutestonext = trainInterval - test1
-
-   //       console.log("2   " + minutestonext)
-
-   //      //  Calculate THe Time of The Next Train In Minutes from Beginning of the Schedule 
-
-   //      nextTrainTime = minutesFromStartOfDay + minutestonext;
-   //      var nextTrainTime1 = nextTrainTime
-   //      console.log("next train time in minutes  " + nextTrainTime)
-   //    }
+      }
 
     
-    
-
-   //  var nextTrainTimehhmm = moment.utc().startOf('day').add(nextTrainTime, 'minutes').format('hh:mm A')
-   //  console.log(nextTrainTimehhmm)
-
-    // Code for the push
-
-      dataRef.ref().push({
-
-        trainName: trainName,
-        trainStart: trainStart,
-        trainInterval: trainInterval,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-      });
-
-
-    // alert("train Name = " + trainName + "  first train is at " + trainStart + "  runs Every " + trainInterval + "Mins  Current Time is " + currentTimeFormated +   "Mins to next Train is " + minutestonext + " Mins  Next Train Time is " + nextTrainTimehhmm);
   });
 
 
@@ -500,7 +408,15 @@
         }
         else
         {
-           test1 = (minutesFromStartOfDay % childSnapshot.val().trainInterval)
+          // -------------------------------------
+
+          var x = currentMin - mmCalc
+
+           
+
+
+          // ------------------------------------
+           test1 = (x % childSnapshot.val().trainInterval)
 
            console.log("1   " + test1)
     
@@ -519,7 +435,9 @@
       }
       else
       {
-         test1 = (minutesFromStartOfDay % childSnapshot.val().trainInterval)
+
+         var x = currentMin - mmCalc
+         test1 = (x % childSnapshot.val().trainInterval)
 
          console.log("1   " + test1)
     
